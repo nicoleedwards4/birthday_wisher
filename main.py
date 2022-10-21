@@ -2,6 +2,7 @@ from datetime import datetime
 import pandas
 import random
 import smtplib
+import creds
 
 now = datetime.now()
 today_month = now.month
@@ -13,8 +14,9 @@ birthday_dict = {(data_row["month"], data_row["day"]): data_row for (index, data
 
 letters = ("letter_templates/letter_1.txt", "letter_templates/letter_2.txt", "letter_templates/letter_3.txt")
 
-my_gmail = "necodetesting@gmail.com"
-gmail_pw = "apfbufdletsvbwtc"
+my_gmail = creds.my_gmail
+gmail_pw = creds.gmail_pw
+my_yahoo = creds.my_yahoo
 
 if today in birthday_dict:
     birthday_person = birthday_dict[today]
@@ -31,5 +33,5 @@ if today in birthday_dict:
             connection.login(user=my_gmail, password=gmail_pw)
             connection.sendmail(
                 from_addr=my_gmail,
-                to_addrs="necodetesting@yahoo.com",
+                to_addrs=my_yahoo,
                 msg=f"Subject:Go Look Up\n\nGo Look Up")
